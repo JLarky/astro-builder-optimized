@@ -1,46 +1,30 @@
-<script async src="https://cdn.builder.io/js/webcomponents"></script>
-<script is:inline>
-  console.log(window.builderWcLoadCallbacks)
+---
+import {
+  fetchOneEntry,
+} from "@builder.io/sdk-react";
+import BuilderContent from "../components/react/BuilderContent";
 
-    class MyCounter extends HTMLElement {
-    constructor() {
-      super();
-    }
-    connectedCallback() {
-      this.render();
-    }
-    render() {
-      this.innerHTML = `
-        <div>
-          <h1>${this.getAttribute("title")}</hh1>
-          <h2>${this.getAttribute("subTitle")}</h2>
-        </div>
-      `;
-    }
-  }
+const PUBLIC_API_KEY = 'dbca46c0d48940b09ef11fa8978c6dea';
 
-  customElements.define("my-counter", MyCounter);
-  // When the SDK loads
-  window.builderWcLoadCallbacks = [
-    (context) => {
-      // Register each component
-      console.log("context", context);
-      context.Builder.registerComponent(null, {
-        name: "Counter",
-        tag: "my-counter",
-        inputs: [
-          { name: "title", type: "string", defaultValue: "Hello world" },
-          { name: "subTitle", type: "string", defaultValue: "Lorem ipsum" },
-        ],
-      });
-    },
-  ];
-  console.log(window.builderWcLoadCallbacks)
-  
-</script>
+const urlPath = "/builder-demo";
 
-<!-- Put this component where you want this Builder content to display -->
-<builder-component model="page" api-key="dbca46c0d48940b09ef11fa8978c6dea">
-  <!-- content here displays while loading -->
-  Loading...
-</builder-component>
+const content = await fetchOneEntry({
+//   options: getBuilderSearchParams(''),
+  apiKey: PUBLIC_API_KEY,
+  model: "page",
+  userAttributes: { urlPath },
+});
+
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Builder.io Astro Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+    <h1> Hello</h1>
+    <BuilderContent client:idle apiKey={PUBLIC_API_KEY} model="page" content={content} />
+</body>
+</html>

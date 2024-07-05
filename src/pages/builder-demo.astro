@@ -15,6 +15,9 @@ const content = await fetchOneEntry({
   userAttributes: { urlPath },
 });
 
+// const needsCounterScript = content?.data?.blocks.find(...)
+// console.log(content?.data?.blocks);
+
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -26,5 +29,31 @@ const content = await fetchOneEntry({
 <body>
     <h1> Hello</h1>
     <BuilderContent client:idle apiKey={PUBLIC_API_KEY} model="page" content={content} />
+    <script>
+        class MyCounter extends HTMLElement {
+            constructor() {
+                super();
+               console.log('MyCounter created'); 
+               this.addEventListener('click', (e) => {
+                if (!(e.target instanceof HTMLElement)) {
+                    return
+                }
+                const span = this.querySelector('span');
+                if (!span) {
+                    return;
+                }
+                let count = Number(span?.textContent) || 0;
+                const action = e.target?.dataset?.action;
+                if (action === 'inc') {
+                    count++;
+                } else if (action === 'dec') {
+                    count--;
+                };
+                span.textContent = ""+count;
+               });
+            }
+        }
+        customElements.define('my-counter', MyCounter);
+    </script>
 </body>
 </html>

@@ -6,6 +6,14 @@ interface CounterProps {
   initialCount?: number;
 }
 
+declare module "react/jsx-runtime" {
+  namespace JSX {
+    interface IntrinsicElements {
+      "my-counter": any;
+    }
+  }
+}
+
 function Counter({ initialCount = 99 }: CounterProps) {
   console.log("Counter component rendered");
   const count = initialCount;
@@ -20,11 +28,15 @@ function Counter({ initialCount = 99 }: CounterProps) {
   // };
 
   return (
-    <div className={styles.counter}>
-      <button className={styles.btn}>-</button>
+    <my-counter class={styles.counter}>
+      <button data-action="dec" className={styles.btn}>
+        -
+      </button>
       <span className={styles.count}>{count}</span>
-      <button className={styles.btn}>+</button>
-    </div>
+      <button data-action="inc" className={styles.btn}>
+        +
+      </button>
+    </my-counter>
   );
 }
 

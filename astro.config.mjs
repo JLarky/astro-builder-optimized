@@ -15,4 +15,9 @@ export default defineConfig({
     svelte(),
     vue(),
   ],
+  vite: {
+    build: {
+      sourcemap: true,
+    },
+  },
 });

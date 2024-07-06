@@ -10,7 +10,9 @@ export default defineConfig({
   // Enable many frameworks to support all different kinds of components.
   integrations: [
     preact({ include: ["**/preact/*"] }),
-    solid({ include: ["**/solid/*"] }),
+    solid({
+      include: ["**/solid/*", "./node_modules/@builder.io/sdk-solid/**"],
+    }),
     react({ include: ["**/react/*"] }),
     svelte(),
     vue(),
@@ -19,5 +21,6 @@ export default defineConfig({
     build: {
       sourcemap: true,
     },
+    optimizeDeps: { exclude: ["isolated-vm"] },
   },
 });

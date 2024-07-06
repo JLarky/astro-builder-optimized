@@ -27,8 +27,8 @@ const content = await fetchOneEntry({
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
-    <h1> Hello React + WC</h1>
-    <BuilderContent apiKey={PUBLIC_API_KEY} model="page" content={content} />
+    <h1> Hello React + WC hydrated</h1>
+    <BuilderContent client:idle apiKey={PUBLIC_API_KEY} model="page" content={content} />
     <script>
         class MyCounter extends HTMLElement {
             constructor() {

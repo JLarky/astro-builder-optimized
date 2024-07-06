@@ -1,8 +1,8 @@
 ---
 import {
   fetchOneEntry,
-} from "@builder.io/sdk-react";
-import BuilderContent from "../components/react/BuilderContent";
+} from "@builder.io/sdk-solid";
+import BuilderContent from "../components/solid/BuilderContent";
 
 const PUBLIC_API_KEY = 'dbca46c0d48940b09ef11fa8978c6dea';
 
@@ -27,7 +27,7 @@ const content = await fetchOneEntry({
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
-    <h1> Hello React + WC</h1>
+    <h1> Hello Solid + WC</h1>
     <BuilderContent apiKey={PUBLIC_API_KEY} model="page" content={content} />
     <script>
         class MyCounter extends HTMLElement {

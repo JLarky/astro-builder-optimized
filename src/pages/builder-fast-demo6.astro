@@ -27,9 +27,12 @@ const content = await fetchOneEntry({
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
-    <h1> Hello Solid + hydration in preview WC</h1>
+    <h1> Hello Solid + hydration in preview + solid</h1>
     <BuilderContent client:click apiKey={PUBLIC_API_KEY} model="page" content={content} />
     <script>
+        import * as solid from 'solid-js/web';
+        import { InnerCounter } from '../components/react/InnerCounter';
+        console.log('solid', solid, InnerCounter);
         class MyCounter extends HTMLElement {
             constructor() {
                 super();

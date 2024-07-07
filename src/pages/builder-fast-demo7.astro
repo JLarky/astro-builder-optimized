@@ -27,16 +27,16 @@ const content = await fetchOneEntry({
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
-    <h1> Hello Solid + hydration in preview + solid</h1>
+    <h1> Hello Solid + hydration in preview + react</h1>
     <BuilderContent client:click apiKey={PUBLIC_API_KEY} model="page" content={content} />
     <script>
-        import { render } from "solid-js/web";
-        import { InnerCounter } from '../components/solid/InnerCounter';
+        import { hydrateRoot } from 'react-dom/client';
+        import { InnerCounter } from '../components/react/InnerCounter';
+        import {jsx} from "react/jsx-runtime";
         class MyCounter extends HTMLElement {
             constructor() {
                super();
-               this.innerHTML = ``;
-               render(() => InnerCounter({initialCount: 50}), this)
+               hydrateRoot(this, jsx(InnerCounter, {initialCount: 50})); 
             }
         }
         customElements.define('my-counter', MyCounter);
